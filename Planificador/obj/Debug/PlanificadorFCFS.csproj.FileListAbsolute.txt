@@ -1,0 +1,14 @@
+C:\Users\Gustavo\Documents\PlanificadorFCFS\bin\Debug\PlanificadorFCFS.exe
+C:\Users\Gustavo\Documents\PlanificadorFCFS\bin\Debug\PlanificadorFCFS.pdb
+C:\Users\Gustavo\Documents\PlanificadorFCFS\obj\Debug\PlanificadorFCFS.exe
+C:\Users\Gustavo\Documents\PlanificadorFCFS\obj\Debug\PlanificadorFCFS.pdb
+C:\Users\Gustavo\Documents\PlanificadorFCFS\obj\Debug\PlanificadorFCFS.MainForm.resources
+C:\Users\Gustavo\Documents\PlanificadorFCFS\obj\Debug\PlanificadorFCFS.csproj.GenerateResource.Cache
+C:\Users\Gustavo\Documents\PlanificadorFCFS\obj\Debug\PlanificadorFCFS.csprojResolveAssemblyReference.cache
+C:\Users\Gustavo\Documents\Planificador\bin\Debug\PlanificadorFCFS.exe
+C:\Users\Gustavo\Documents\Planificador\bin\Debug\PlanificadorFCFS.pdb
+C:\Users\Gustavo\Documents\Planificador\obj\Debug\PlanificadorFCFS.csprojResolveAssemblyReference.cache
+C:\Users\Gustavo\Documents\Planificador\obj\Debug\PlanificadorFCFS.MainForm.resources
+C:\Users\Gustavo\Documents\Planificador\obj\Debug\PlanificadorFCFS.csproj.GenerateResource.Cache
+C:\Users\Gustavo\Documents\Planificador\obj\Debug\PlanificadorFCFS.exe
+C:\Users\Gustavo\Documents\Planificador\obj\Debug\PlanificadorFCFS.pdb
