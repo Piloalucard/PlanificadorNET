@@ -10,9 +10,6 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using System.Diagnostics;
-
-using System.Threading;
 using System.Windows.Forms.DataVisualization.Charting;
 
 namespace PlanificadorFCFS
@@ -44,28 +41,48 @@ namespace PlanificadorFCFS
 			//
 		}
 		
+		private void STR()
+		{
+			Process temp;
+			for (int j = 0; j <= procesos.Count - 2; j++) 
+			{
+				for (int i = 0; i <= procesos.Count - 2; i++) 
+				{
+					if (procesos[i] > procesos[i + 1]) 
+					{
+						temp = procesos[i + 1];
+						procesos[i + 1] = procesos[i];
+						procesos[i] = temp;
+					}
+				}
+			}
+			
+			FCFS();
+
+		}
+		
 		private void FCFS()
 		{
-      		int totalWaitingTime = 0;
-      		foreach(Process pro in procesos)
-      		{
-      			pro.WaitingTime = totalWaitingTime;
-      			
-      			totalWaitingTime = pro.ServiceTime + totalWaitingTime;
-      			
-      			pro.TotalTime = totalWaitingTime;
-      			
+			int totalWaitingTime = 0;
+			foreach(Process pro in procesos)
+			{
+				pro.WaitingTime = totalWaitingTime;
+				
+				totalWaitingTime = pro.ServiceTime + totalWaitingTime;
+				
+				pro.TotalTime = totalWaitingTime;
+				
 
-      		}
-      		
+			}
 			
-      		
-      		foreach(Process pro in procesos)
-      		{
+			
+			
+			foreach(Process pro in procesos)
+			{
 				pro.DoWork(100);
-      			
-      		}
-      		
+				
+			}
+			
 		}
 		
 		private void RoundRobin(int quantum)
@@ -100,18 +117,18 @@ namespace PlanificadorFCFS
 			FCFS();
 		}
 
-        private void btn_addproc_Click(object sender, EventArgs e)
-        {
+		private void btn_addproc_Click(object sender, EventArgs e)
+		{
 
 			Series serie = chart.Series.Add(tb_name.Text);
 			serie.Label = tb_name.Text;
 			serie.Points.Add(0);
 
 			try
-            {
+			{
 				int tiempo = Int32.Parse(tb_time.Text);
 				if(tiempo > 0)
-                {
+				{
 					Process auxProcess = new Process(contador,tiempo,tb_name.Text,chart);
 					
 					auxProcess.Pb = serie;
@@ -119,19 +136,19 @@ namespace PlanificadorFCFS
 					
 					if(tiempo < min)
 						min = tiempo;
-				
+					
 					if(tiempo > max)
 						max = tiempo;
 
 					total = total + tiempo;
 				}
 				else
-                {
+				{
 					throw new Exception();
-                }
+				}
 			}
-            catch
-            {
+			catch
+			{
 				Random rd = new Random();
 				int rand_num;
 				rand_num = rd.Next(1, 10);
@@ -142,17 +159,17 @@ namespace PlanificadorFCFS
 				
 				if(rand_num < min)
 					min = rand_num;
-			
+				
 				if(rand_num > max)
 					max = rand_num;
 
 				total = total + rand_num;
 				
-					
+				
 
 			}
 			
-            proc++;
+			proc++;
 			contador++;
 			tb_name.Text = "";
 			tb_time.Text = "0";
@@ -172,7 +189,7 @@ namespace PlanificadorFCFS
 			desv = Math.Sqrt(desv);
 			desv = Math.Round(desv,4);
 			lbl_desv.Text = "Desv: "+desv.ToString();
-        }
+		}
 
 
 		
@@ -182,5 +199,21 @@ namespace PlanificadorFCFS
 			
 			RoundRobin(1);
 		}
-    }
+		
+		void Btn_strClick(object sender, EventArgs e)
+		{
+			chart.Update();
+			STR();
+		}
+		
+		void Btn_resproClick(object sender, EventArgs e)
+		{
+			foreach(Process p in procesos)
+			{
+				p.Finish = false;
+				p.ActualStep = 0;
+				p.Total = 0;
+			}
+		}
+	}
 }

@@ -54,6 +54,8 @@ namespace PlanificadorFCFS
 			this.lbl_min = new System.Windows.Forms.Label();
 			this.lbl_med = new System.Windows.Forms.Label();
 			this.lbl_desv = new System.Windows.Forms.Label();
+			this.btn_str = new System.Windows.Forms.Button();
+			this.btn_respro = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.chart)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -64,7 +66,7 @@ namespace PlanificadorFCFS
 			this.lbl_titulo.Name = "lbl_titulo";
 			this.lbl_titulo.Size = new System.Drawing.Size(411, 61);
 			this.lbl_titulo.TabIndex = 0;
-			this.lbl_titulo.Text = "Planificador 2";
+			this.lbl_titulo.Text = "Planificador 3";
 			this.lbl_titulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			// 
 			// btn_start
@@ -224,11 +226,35 @@ namespace PlanificadorFCFS
 			this.lbl_desv.TabIndex = 15;
 			this.lbl_desv.Text = "Desv:";
 			// 
+			// btn_str
+			// 
+			this.btn_str.BackColor = System.Drawing.Color.White;
+			this.btn_str.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btn_str.Location = new System.Drawing.Point(332, 510);
+			this.btn_str.Name = "btn_str";
+			this.btn_str.Size = new System.Drawing.Size(158, 43);
+			this.btn_str.TabIndex = 16;
+			this.btn_str.Text = "Shortest Time";
+			this.btn_str.UseVisualStyleBackColor = false;
+			this.btn_str.Click += new System.EventHandler(this.Btn_strClick);
+			// 
+			// btn_respro
+			// 
+			this.btn_respro.Location = new System.Drawing.Point(91, 36);
+			this.btn_respro.Name = "btn_respro";
+			this.btn_respro.Size = new System.Drawing.Size(104, 23);
+			this.btn_respro.TabIndex = 17;
+			this.btn_respro.Text = "Reset Process";
+			this.btn_respro.UseVisualStyleBackColor = true;
+			this.btn_respro.Click += new System.EventHandler(this.Btn_resproClick);
+			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(753, 593);
+			this.Controls.Add(this.btn_respro);
+			this.Controls.Add(this.btn_str);
 			this.Controls.Add(this.lbl_desv);
 			this.Controls.Add(this.lbl_med);
 			this.Controls.Add(this.lbl_min);
@@ -251,6 +277,8 @@ namespace PlanificadorFCFS
 			this.ResumeLayout(false);
 			this.PerformLayout();
 		}
+		private System.Windows.Forms.Button btn_respro;
+		private System.Windows.Forms.Button btn_str;
 		private System.Windows.Forms.Label lbl_desv;
 		private System.Windows.Forms.Label lbl_med;
 		private System.Windows.Forms.Label lbl_min;

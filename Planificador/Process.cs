@@ -85,6 +85,37 @@ namespace PlanificadorFCFS
 			
 
 		}
+
+		
+		public static bool operator==(Process p1, Process p2)
+		{
+			return p1.ServiceTime == p2.ServiceTime;
+		}
+		
+		public static bool operator!=(Process p1, Process p2)
+		{
+			return p1.ServiceTime != p2.ServiceTime;
+		}
+		
+		public static bool operator <(Process p1, Process p2)
+		{
+			return p1.ServiceTime < p2.ServiceTime;
+		}
+		
+		public static bool operator >(Process p1, Process p2)
+		{
+			return p1.ServiceTime > p2.ServiceTime;
+		}
+		
+		public static bool operator <=(Process p1, Process p2)
+		{
+			return p1.ServiceTime <= p2.ServiceTime;
+		}
+		
+		public static bool operator >=(Process p1, Process p2)
+		{
+			return p1.ServiceTime >= p2.ServiceTime;
+		}
 		
 		public String ToString()
 		{
@@ -94,6 +125,15 @@ namespace PlanificadorFCFS
 			return result;
 		}
 		
+		public int ActualStep {
+			get { return actualStep; }
+			set { actualStep = value; }
+		}
+
+		public int Total {
+			get { return total; }
+			set { total = value; }
+		}
 		
 		public bool Finish {
 			get { return finish; }
