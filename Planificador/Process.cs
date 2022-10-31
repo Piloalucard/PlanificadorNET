@@ -70,7 +70,7 @@ namespace PlanificadorFCFS
 				}
 			}
 
-			
+			Debug.WriteLine("Proceso "+this.name+" ["+id.ToString()+"]  "+total.ToString()+"%");
 			
 			
 			if(actualStep >= serviceTime)

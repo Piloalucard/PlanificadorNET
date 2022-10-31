@@ -213,7 +213,9 @@ namespace PlanificadorFCFS
 				p.Finish = false;
 				p.ActualStep = 0;
 				p.Total = 0;
+				p.Pb.Points[0].SetValueXY(p.Name, 0);
 			}
+			chart.Update();
 		}
 	}
 }
