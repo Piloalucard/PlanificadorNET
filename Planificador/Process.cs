@@ -21,6 +21,7 @@ namespace PlanificadorFCFS
 	public class Process
 	{
 		private int id,serviceTime,waitingTime,totalTime,step,actualStep,total;
+		private double prioridad;
 		private string name="";
 		private Series pb;
 		private Chart chr;
@@ -67,6 +68,7 @@ namespace PlanificadorFCFS
 					pb.Points[0].Color = Color.Red;
 					chr.Update();
 					actualStep++;
+
 				}
 			}
 
@@ -78,13 +80,46 @@ namespace PlanificadorFCFS
 				finish = true;
 				pb.Points[0].SetValueXY(this.name, 100);
 				pb.Points[0].Color = Color.Green;
-					
+				prioridad=0;
 				chr.Update();
 				Debug.WriteLine("Proceso "+id.ToString()+" terminado con exito! ");
 			}
 			
 
 		}
+		
+		public bool ThisServiceTimeBig(Process other)
+		{
+			return this.ServiceTime > other.ServiceTime;
+		}
+		
+		public bool OtherServiceTimeBig(Process other)
+		{
+			return this.ServiceTime < other.ServiceTime;
+		}
+		
+		public bool EqualServiceTimeBig(Process other)
+		{
+			return this.ServiceTime == other.ServiceTime;
+		}
+		
+		//OrdenarFCFS
+		public bool ThisTotalTimeBig(Process other)
+		{
+			return this.TotalTime > other.TotalTime;
+		}
+		
+		public bool OtherTotalBig(Process other)
+		{
+			return this.TotalTime < other.TotalTime;
+		}
+		
+		public bool EqualTotalBig(Process other)
+		{
+			return this.TotalTime == other.TotalTime;
+		}
+
+
 
 		
 		public static bool operator==(Process p1, Process p2)
@@ -121,8 +156,13 @@ namespace PlanificadorFCFS
 		{
 			String result;
 			result = "ID: "+id.ToString()+" / Service Time: " + serviceTime.ToString() +" / Waiting Time: " +
-				waitingTime.ToString() + " / Total Time: "+totalTime.ToString();
+				waitingTime.ToString() + " / Total Time: "+totalTime.ToString() + " / Priority: "+prioridad.ToString();
 			return result;
+		}
+		
+		public double Prioridad {
+			get { return prioridad; }
+			set { prioridad = value; }
 		}
 		
 		public int ActualStep {

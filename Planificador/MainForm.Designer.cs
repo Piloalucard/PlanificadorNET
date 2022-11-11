@@ -39,7 +39,6 @@ namespace PlanificadorFCFS
 			System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
 			System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
 			this.lbl_titulo = new System.Windows.Forms.Label();
-			this.btn_start = new System.Windows.Forms.Button();
 			this.chart = new System.Windows.Forms.DataVisualization.Charting.Chart();
 			this.btn_addproc = new System.Windows.Forms.Button();
 			this.tb_name = new System.Windows.Forms.TextBox();
@@ -54,8 +53,11 @@ namespace PlanificadorFCFS
 			this.lbl_min = new System.Windows.Forms.Label();
 			this.lbl_med = new System.Windows.Forms.Label();
 			this.lbl_desv = new System.Windows.Forms.Label();
-			this.btn_str = new System.Windows.Forms.Button();
 			this.btn_respro = new System.Windows.Forms.Button();
+			this.btn_start = new System.Windows.Forms.Button();
+			this.btn_str = new System.Windows.Forms.Button();
+			this.btn_prior = new System.Windows.Forms.Button();
+			this.btn_mlq = new System.Windows.Forms.Button();
 			((System.ComponentModel.ISupportInitialize)(this.chart)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -66,20 +68,8 @@ namespace PlanificadorFCFS
 			this.lbl_titulo.Name = "lbl_titulo";
 			this.lbl_titulo.Size = new System.Drawing.Size(411, 61);
 			this.lbl_titulo.TabIndex = 0;
-			this.lbl_titulo.Text = "Planificador 3";
+			this.lbl_titulo.Text = "Planificador NET";
 			this.lbl_titulo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-			// 
-			// btn_start
-			// 
-			this.btn_start.BackColor = System.Drawing.Color.White;
-			this.btn_start.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.btn_start.Location = new System.Drawing.Point(332, 439);
-			this.btn_start.Name = "btn_start";
-			this.btn_start.Size = new System.Drawing.Size(158, 43);
-			this.btn_start.TabIndex = 1;
-			this.btn_start.Text = "FCFS";
-			this.btn_start.UseVisualStyleBackColor = false;
-			this.btn_start.Click += new System.EventHandler(this.Btn_startClick);
 			// 
 			// chart
 			// 
@@ -90,7 +80,7 @@ namespace PlanificadorFCFS
 			this.chart.Location = new System.Drawing.Point(53, 88);
 			this.chart.Name = "chart";
 			this.chart.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Bright;
-			this.chart.Size = new System.Drawing.Size(658, 300);
+			this.chart.Size = new System.Drawing.Size(836, 300);
 			this.chart.TabIndex = 2;
 			this.chart.Text = "chart";
 			// 
@@ -145,7 +135,7 @@ namespace PlanificadorFCFS
 			// 
 			this.btn_rr.BackColor = System.Drawing.Color.White;
 			this.btn_rr.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.btn_rr.Location = new System.Drawing.Point(553, 439);
+			this.btn_rr.Location = new System.Drawing.Point(538, 439);
 			this.btn_rr.Name = "btn_rr";
 			this.btn_rr.Size = new System.Drawing.Size(158, 43);
 			this.btn_rr.TabIndex = 8;
@@ -190,7 +180,7 @@ namespace PlanificadorFCFS
 			// 
 			this.lbl_max.AutoSize = true;
 			this.lbl_max.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lbl_max.Location = new System.Drawing.Point(553, 493);
+			this.lbl_max.Location = new System.Drawing.Point(538, 493);
 			this.lbl_max.Name = "lbl_max";
 			this.lbl_max.Size = new System.Drawing.Size(51, 20);
 			this.lbl_max.TabIndex = 12;
@@ -200,7 +190,7 @@ namespace PlanificadorFCFS
 			// 
 			this.lbl_min.AutoSize = true;
 			this.lbl_min.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lbl_min.Location = new System.Drawing.Point(553, 513);
+			this.lbl_min.Location = new System.Drawing.Point(538, 513);
 			this.lbl_min.Name = "lbl_min";
 			this.lbl_min.Size = new System.Drawing.Size(42, 20);
 			this.lbl_min.TabIndex = 13;
@@ -210,7 +200,7 @@ namespace PlanificadorFCFS
 			// 
 			this.lbl_med.AutoSize = true;
 			this.lbl_med.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lbl_med.Location = new System.Drawing.Point(553, 533);
+			this.lbl_med.Location = new System.Drawing.Point(538, 533);
 			this.lbl_med.Name = "lbl_med";
 			this.lbl_med.Size = new System.Drawing.Size(62, 20);
 			this.lbl_med.TabIndex = 14;
@@ -220,11 +210,33 @@ namespace PlanificadorFCFS
 			// 
 			this.lbl_desv.AutoSize = true;
 			this.lbl_desv.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lbl_desv.Location = new System.Drawing.Point(553, 553);
+			this.lbl_desv.Location = new System.Drawing.Point(538, 553);
 			this.lbl_desv.Name = "lbl_desv";
 			this.lbl_desv.Size = new System.Drawing.Size(54, 20);
 			this.lbl_desv.TabIndex = 15;
 			this.lbl_desv.Text = "Desv:";
+			// 
+			// btn_respro
+			// 
+			this.btn_respro.Location = new System.Drawing.Point(91, 36);
+			this.btn_respro.Name = "btn_respro";
+			this.btn_respro.Size = new System.Drawing.Size(104, 23);
+			this.btn_respro.TabIndex = 17;
+			this.btn_respro.Text = "Reset Process";
+			this.btn_respro.UseVisualStyleBackColor = true;
+			this.btn_respro.Click += new System.EventHandler(this.Btn_resproClick);
+			// 
+			// btn_start
+			// 
+			this.btn_start.BackColor = System.Drawing.Color.White;
+			this.btn_start.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btn_start.Location = new System.Drawing.Point(332, 439);
+			this.btn_start.Name = "btn_start";
+			this.btn_start.Size = new System.Drawing.Size(158, 43);
+			this.btn_start.TabIndex = 1;
+			this.btn_start.Text = "FCFS";
+			this.btn_start.UseVisualStyleBackColor = false;
+			this.btn_start.Click += new System.EventHandler(this.Btn_startClick);
 			// 
 			// btn_str
 			// 
@@ -238,21 +250,37 @@ namespace PlanificadorFCFS
 			this.btn_str.UseVisualStyleBackColor = false;
 			this.btn_str.Click += new System.EventHandler(this.Btn_strClick);
 			// 
-			// btn_respro
+			// btn_prior
 			// 
-			this.btn_respro.Location = new System.Drawing.Point(91, 36);
-			this.btn_respro.Name = "btn_respro";
-			this.btn_respro.Size = new System.Drawing.Size(104, 23);
-			this.btn_respro.TabIndex = 17;
-			this.btn_respro.Text = "Reset Process";
-			this.btn_respro.UseVisualStyleBackColor = true;
-			this.btn_respro.Click += new System.EventHandler(this.Btn_resproClick);
+			this.btn_prior.BackColor = System.Drawing.Color.White;
+			this.btn_prior.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btn_prior.Location = new System.Drawing.Point(743, 510);
+			this.btn_prior.Name = "btn_prior";
+			this.btn_prior.Size = new System.Drawing.Size(158, 43);
+			this.btn_prior.TabIndex = 19;
+			this.btn_prior.Text = "Priority";
+			this.btn_prior.UseVisualStyleBackColor = false;
+			this.btn_prior.Click += new System.EventHandler(this.Btn_priorClick);
+			// 
+			// btn_mlq
+			// 
+			this.btn_mlq.BackColor = System.Drawing.Color.White;
+			this.btn_mlq.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btn_mlq.Location = new System.Drawing.Point(743, 439);
+			this.btn_mlq.Name = "btn_mlq";
+			this.btn_mlq.Size = new System.Drawing.Size(158, 43);
+			this.btn_mlq.TabIndex = 18;
+			this.btn_mlq.Text = "MLQ";
+			this.btn_mlq.UseVisualStyleBackColor = false;
+			this.btn_mlq.Click += new System.EventHandler(this.Btn_mlqClick);
 			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(753, 593);
+			this.ClientSize = new System.Drawing.Size(934, 593);
+			this.Controls.Add(this.btn_prior);
+			this.Controls.Add(this.btn_mlq);
 			this.Controls.Add(this.btn_respro);
 			this.Controls.Add(this.btn_str);
 			this.Controls.Add(this.lbl_desv);
@@ -277,6 +305,8 @@ namespace PlanificadorFCFS
 			this.ResumeLayout(false);
 			this.PerformLayout();
 		}
+		private System.Windows.Forms.Button btn_mlq;
+		private System.Windows.Forms.Button btn_prior;
 		private System.Windows.Forms.Button btn_respro;
 		private System.Windows.Forms.Button btn_str;
 		private System.Windows.Forms.Label lbl_desv;

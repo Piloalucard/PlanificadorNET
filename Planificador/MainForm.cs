@@ -8,6 +8,7 @@
  */
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
@@ -22,7 +23,7 @@ namespace PlanificadorFCFS
 	{
 		List<Process> procesos = new List<Process>();
 		
-		int contador = 1,max=-1,min=Int32.MaxValue,total=0,proc=0;
+		int contador = 1,max=-1,min=Int32.MaxValue,total=0,proc=0,contMLQ=10;
 		double med=0.0f,desv=0.0f;
 		public MainForm()
 		{
@@ -39,6 +40,46 @@ namespace PlanificadorFCFS
 			//
 			// TODO: Add constructor code after the InitializeComponent() call.
 			//
+		}
+		
+		private void MLQ()
+		{
+			int j = 10;
+			while(j > 0)
+			{
+				Debug.WriteLine("Tareas de prioridad:" + j.ToString());
+				foreach(Process p in procesos)
+				{
+					if(p.Prioridad == j)
+					{
+						
+						p.DoWork(1);
+						p.Prioridad = p.Prioridad - 1;
+					}
+				}
+				j--;
+			}
+			
+	
+		}
+		
+		private void JSF()
+		{
+			Process temp;
+			for (int j = 0; j <= procesos.Count - 2; j++) 
+			{
+				for (int i = 0; i <= procesos.Count - 2; i++) 
+				{
+					if (procesos[i].ThisServiceTimeBig(procesos[i + 1]))
+					{
+						temp = procesos[i + 1];
+						procesos[i + 1] = procesos[i];
+						procesos[i] = temp;
+					}
+				}
+			}
+			
+			FCFS();
 		}
 		
 		private void STR()
@@ -80,8 +121,9 @@ namespace PlanificadorFCFS
 			foreach(Process pro in procesos)
 			{
 				pro.DoWork(100);
-				
+				Debug.WriteLine(pro.ToString());
 			}
+			
 			
 		}
 		
@@ -101,6 +143,19 @@ namespace PlanificadorFCFS
 		
 		void reset()
 		{
+			Process temp;
+			for (int j = 0; j <= procesos.Count - 2; j++) 
+			{
+				for (int i = 0; i <= procesos.Count - 2; i++) 
+				{
+					if (procesos[i].ThisTotalTimeBig(procesos[i + 1]))
+					{
+						temp = procesos[i + 1];
+						procesos[i + 1] = procesos[i];
+						procesos[i] = temp;
+					}
+				}
+			}
 			foreach(Process pro in procesos)
 			{
 				pro.Pb.Points[0].SetValueXY(pro.Name, 0);
@@ -119,76 +174,83 @@ namespace PlanificadorFCFS
 
 		private void btn_addproc_Click(object sender, EventArgs e)
 		{
-
-			Series serie = chart.Series.Add(tb_name.Text);
-			serie.Label = tb_name.Text;
-			serie.Points.Add(0);
-
-			try
-			{
-				int tiempo = Int32.Parse(tb_time.Text);
-				if(tiempo > 0)
-				{
-					Process auxProcess = new Process(contador,tiempo,tb_name.Text,chart);
+			try{
+					Series serie = chart.Series.Add(tb_name.Text);
+					serie.Label = tb_name.Text;
+					serie.Points.Add(0);
+					try
+					{
+						
+						int tiempo = Int32.Parse(tb_time.Text);
+						if(tiempo > 0)
+						{
+							Process auxProcess = new Process(contador,tiempo,tb_name.Text,chart);
+							
+							auxProcess.Pb = serie;
+							auxProcess.Prioridad = tiempo;
+							procesos.Add(auxProcess);
+							
+							if(tiempo < min)
+								min = tiempo;
+							
+							if(tiempo > max)
+								max = tiempo;
+		
+							total = total + tiempo;
+						}
+						else
+						{
+							throw new Exception();
+						}
+					}
+					catch
+					{
+						Random rd = new Random();
+						int rand_num;
+						rand_num = rd.Next(1, 10);
+						Process auxProcess = new Process(contador, rand_num,tb_name.Text,chart);
+		
+						auxProcess.Prioridad = rand_num;
+						auxProcess.Pb = serie;
+						procesos.Add(auxProcess);
+						
+						if(rand_num < min)
+							min = rand_num;
+						
+						if(rand_num > max)
+							max = rand_num;
+		
+						total = total + rand_num;
+						
+						
+		
+					}
 					
-					auxProcess.Pb = serie;
-					procesos.Add(auxProcess);
+					proc++;
+					contador++;
+					tb_name.Text = "";
+					tb_time.Text = "0";
+					reset();
 					
-					if(tiempo < min)
-						min = tiempo;
+					lbl_min.Text = "Min: "+min.ToString();
+					lbl_max.Text = "Max: "+max.ToString();
+					med = total / proc;
+					lbl_med.Text = "Media: "+med.ToString();
+					double aux=0.0f;
+					foreach(Process pro in procesos)
+					{
+						aux = aux + Math.Abs(med - Math.Pow(pro.ServiceTime,2));
+					}
 					
-					if(tiempo > max)
-						max = tiempo;
-
-					total = total + tiempo;
-				}
-				else
-				{
-					throw new Exception();
-				}
+					desv = aux / proc;
+					desv = Math.Sqrt(desv);
+					desv = Math.Round(desv,4);
+					lbl_desv.Text = "Desv: "+desv.ToString();
+				
+			}catch{
+				Debug.WriteLine("Ese proceso ya existe.");
+				return;
 			}
-			catch
-			{
-				Random rd = new Random();
-				int rand_num;
-				rand_num = rd.Next(1, 10);
-				Process auxProcess = new Process(contador, rand_num,tb_name.Text,chart);
-
-				auxProcess.Pb = serie;
-				procesos.Add(auxProcess);
-				
-				if(rand_num < min)
-					min = rand_num;
-				
-				if(rand_num > max)
-					max = rand_num;
-
-				total = total + rand_num;
-				
-				
-
-			}
-			
-			proc++;
-			contador++;
-			tb_name.Text = "";
-			tb_time.Text = "0";
-			reset();
-			
-			lbl_min.Text = "Min: "+min.ToString();
-			lbl_max.Text = "Max: "+max.ToString();
-			med = total / proc;
-			lbl_med.Text = "Media: "+med.ToString();
-			double aux=0.0f;
-			foreach(Process pro in procesos)
-			{
-				aux = aux + Math.Abs(med - Math.Pow(pro.ServiceTime,2));
-			}
-			
-			desv = aux / proc;
-			desv = Math.Sqrt(desv);
-			desv = Math.Round(desv,4);
-			lbl_desv.Text = "Desv: "+desv.ToString();
 		}
 
 
@@ -216,6 +278,20 @@ namespace PlanificadorFCFS
 				p.Pb.Points[0].SetValueXY(p.Name, 0);
 			}
 			chart.Update();
+		}
+		
+		void Btn_mlqClick(object sender, EventArgs e)
+		{
+			chart.Update();
+			MLQ();
+			
+		}
+		
+		void Btn_priorClick(object sender, EventArgs e)
+		{
+			chart.Update();
+			JSF();
+			
 		}
 	}
 }
