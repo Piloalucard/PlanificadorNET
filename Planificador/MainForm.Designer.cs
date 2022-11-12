@@ -64,7 +64,7 @@ namespace PlanificadorFCFS
 			// lbl_titulo
 			// 
 			this.lbl_titulo.Font = new System.Drawing.Font("Lucida Bright", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lbl_titulo.Location = new System.Drawing.Point(177, 9);
+			this.lbl_titulo.Location = new System.Drawing.Point(285, 9);
 			this.lbl_titulo.Name = "lbl_titulo";
 			this.lbl_titulo.Size = new System.Drawing.Size(411, 61);
 			this.lbl_titulo.TabIndex = 0;
@@ -258,7 +258,7 @@ namespace PlanificadorFCFS
 			this.btn_prior.Name = "btn_prior";
 			this.btn_prior.Size = new System.Drawing.Size(158, 43);
 			this.btn_prior.TabIndex = 19;
-			this.btn_prior.Text = "Priority";
+			this.btn_prior.Text = "Shortest Job";
 			this.btn_prior.UseVisualStyleBackColor = false;
 			this.btn_prior.Click += new System.EventHandler(this.Btn_priorClick);
 			// 
